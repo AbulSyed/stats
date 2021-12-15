@@ -1,0 +1,114 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+      "url": "https://abulsyed.github.io/stats/trafficFlowLdn.csv"
+    },
+    "title": {
+      "text": [
+        "Car traffic volume in London boroughs",
+        ""
+      ]
+    },
+    "config": {
+      "view": {
+        "stroke": null
+      },
+      "header": {
+        "labelFontSize": 0.1
+      }
+    },
+    "width": 60,
+    "height": 48,
+    "mark": "bar",
+    "params": [
+      {
+        "name": "mySelection",
+        "select": {
+          "type": "interval",
+          "encodings": [
+            "x"
+          ]
+        },
+        "bind": "scales"
+      }
+    ],
+    "transform": [
+      {
+        "lookup": "GSSCode",
+        "from": {
+          "data": {
+            "url": "https://abulsyed.github.io/stats/boroughs.csv"
+          },
+          "key": "GSSCode",
+          "fields": [
+            "gridCol",
+            "gridRow"
+          ]
+        }
+      }
+    ],
+    "encoding": {
+      "x": {
+        "field": "Year",
+        "type": "quantitative",
+        "axis": null
+      },
+      "y": {
+        "field": "TrafficVolume",
+        "type": "quantitative",
+        "axis": null
+      },
+      "color": {
+        "field": "TrafficVolume",
+        "type": "quantitative",
+        "scale": {
+          "domain": [
+            "87",
+            "345",
+            "603",
+            "861",
+            "1119",
+            "1377",
+            "1635",
+            "1893",
+            "2153"
+          ],
+          "range": [
+            "#33A532",
+            "#66AC26",
+            "#99B219",
+            "#CCB90D",
+            "#E68506",
+            "#DB6B08",
+            "#D1520B",
+            "#C6380D",
+            "#BB1E10"
+          ]
+        },
+        "legend": null
+      },
+      "row": {
+        "field": "gridRow",
+        "header": {
+          "title": null
+        }
+      },
+      "column": {
+        "field": "gridCol",
+        "header": {
+          "title": null
+        }
+      },
+      "tooltip": [
+        {
+          "field": "Borough"
+        },
+        {
+          "field": "TrafficVolume"
+        },
+        {
+          "field": "Year"
+        }
+      ]
+    }
+  }
