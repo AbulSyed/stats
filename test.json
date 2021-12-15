@@ -1,0 +1,163 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 600,
+    "height": 450,
+    "title": {
+      "text": [
+        "Car traffic volume in London boroughs",
+        ""
+      ]
+    },
+    "config": {
+      "view": {
+        "stroke": null
+      },
+      "legend": {
+        "orient": "bottom-right",
+        "offset": 0
+      }
+    },
+    "data": {
+      "url": "https://abulsyed.github.io/stats/trafficFlowLdn.csv"
+    },
+    "layer": [
+      {
+        "data": {
+          "url": "https://abulsyed.github.io/stats/trafficFlowLdn.csv"
+        },
+        "transform": [
+          {
+            "lookup": "Borough",
+            "from": {
+              "data": {
+                "url": "https://abulsyed.github.io/stats/boroughs.json",
+                "format": {
+                  "type": "topojson",
+                  "feature": "boroughs"
+                }
+              },
+              "key": "id"
+            },
+            "as": "geoTraffic"
+          },
+          {
+            "filter": "datum.Year==yearSelected_Year"
+          }
+        ],
+        "encoding": {
+          "shape": {
+            "field": "geoTraffic",
+            "type": "geojson"
+          },
+          "color": {
+            "field": "TrafficVolume",
+            "type": "quantitative",
+            "legend": {
+              "title": "Est. traffic volume",
+              "orient": "none",
+              "legendX": 610,
+              "legendY": 10,
+              "direction": "vertical"
+            },
+            "scale": {
+              "scheme": "yellowgreenblue",
+              "domain": [
+                50,
+                2200
+              ]
+            }
+          },
+          "tooltip": [
+            {
+              "field": "Borough"
+            },
+            {
+              "field": "TrafficVolume"
+            }
+          ]
+        },
+        "params": [
+          {
+            "name": "yearSelected",
+            "value": {
+              "Year": "2015"
+            },
+            "bind": {
+              "input": "range",
+              "min": 2015,
+              "max": 2020,
+              "step": 1,
+              "name": "Year:"
+            },
+            "select": {
+              "type": "point",
+              "fields": [
+                "Year"
+              ]
+            }
+          }
+        ],
+        "mark": {
+          "type": "geoshape",
+          "stroke": "white",
+          "strokeWidth": 1
+        }
+      },
+      {
+        "data": {
+          "url": "https://abulsyed.github.io/stats/ldnTubeLines.json",
+          "format": {
+            "type": "topojson",
+            "feature": "line"
+          }
+        },
+        "mark": {
+          "type": "geoshape",
+          "filled": false,
+          "strokeWidth": 0.8
+        },
+        "encoding": {
+          "color": {
+            "field": "id",
+            "legend": {
+              "title": null,
+              "orient": "none",
+              "legendX": 610,
+              "legendY": 250,
+              "direction": "vertical"
+            },
+            "scale": {
+              "domain": [
+                "Bakerloo",
+                "Central",
+                "Circle",
+                "District",
+                "DLR",
+                "Hammersmith & City",
+                "Jubilee",
+                "Metropolitan",
+                "Northern",
+                "Piccadilly",
+                "Victoria",
+                "Waterloo & City"
+              ],
+              "range": [
+                "rgb(137,78,36)",
+                "rgb(220,36,30)",
+                "rgb(255,206,0)",
+                "rgb(1,114,41)",
+                "rgb(0,175,173)",
+                "rgb(215,153,175)",
+                "rgb(106,114,120)",
+                "rgb(114,17,84)",
+                "rgb(0,0,0)",
+                "rgb(0,24,168)",
+                "rgb(0,160,226)",
+                "rgb(106,187,170)"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
