@@ -1,92 +1,92 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {
-      "url": "https://abulsyed.github.io/stats/trafficFlowLdnAvg.csv"
-    },
-    "title": {
-      "text": [
-        "Average car traffic volume in London boroughs (2015-2020)",
-        ""
-      ]
-    },
-    "transform": [
-      {
-        "lookup": "GSSCode",
-        "from": {
-          "data": {
-            "url": "https://abulsyed.github.io/stats/boroughsOrdered.csv"
-          },
-          "key": "GSSCode",
-          "fields": [
-            "gridCol",
-            "gridRow"
-          ]
-        }
-      }
-    ],
-    "config": {
-      "view": {
-        "stroke": null
-      },
-      "header": {
-        "labelFontSize": 0.1
-      }
-    },
-    "width": 60,
-    "height": 48,
-    "mark": {
-      "type": "area",
-      "line": {
-        "stroke": "darkblue"
-      },
-      "fill": {
-        "gradient": "linear",
-        "x1": 1,
-        "y1": 1,
-        "x2": 1,
-        "y2": 0,
-        "stops": [
-          {
-            "offset": 0,
-            "color": "grey"
-          },
-          {
-            "offset": 1,
-            "color": "darkblue"
-          }
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://abulsyed.github.io/stats/trafficFlowLdnAvg.csv"
+  },
+  "title": {
+    "text": [
+      "Average car traffic volume in London boroughs (2015-2020)",
+      ""
+    ]
+  },
+  "transform": [
+    {
+      "lookup": "GSSCode",
+      "from": {
+        "data": {
+          "url": "https://abulsyed.github.io/stats/boroughsOrdered.csv"
+        },
+        "key": "GSSCode",
+        "fields": [
+          "gridCol",
+          "gridRow"
         ]
       }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
     },
-    "encoding": {
-      "x": {
-        "field": "Year",
-        "type": "quantitative",
-        "axis": null
-      },
-      "y": {
-        "field": "TrafficVolume",
-        "type": "quantitative",
-        "axis": null
-      },
-      "row": {
-        "field": "gridRow",
-        "header": {
-          "title": null
-        }
-      },
-      "column": {
-        "field": "gridCol",
-        "header": {
-          "title": null
-        }
-      },
-      "tooltip": [
+    "header": {
+      "labelFontSize": 0.1
+    }
+  },
+  "width": 60,
+  "height": 48,
+  "mark": {
+    "type": "area",
+    "line": {
+      "stroke": "grey"
+    },
+    "fill": {
+      "gradient": "linear",
+      "x1": 1,
+      "y1": 1,
+      "x2": 1,
+      "y2": 0,
+      "stops": [
         {
-          "field": "Borough"
+          "offset": 0,
+          "color": "grey"
         },
         {
-          "field": "Avg"
+          "offset": 1,
+          "color": "grey"
         }
       ]
     }
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "quantitative",
+      "axis": null
+    },
+    "y": {
+      "field": "TrafficVolume",
+      "type": "quantitative",
+      "axis": null
+    },
+    "row": {
+      "field": "gridRow",
+      "header": {
+        "title": null
+      }
+    },
+    "column": {
+      "field": "gridCol",
+      "header": {
+        "title": null
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Borough"
+      },
+      {
+        "field": "Avg"
+      }
+    ]
   }
+}
